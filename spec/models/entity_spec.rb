@@ -17,4 +17,9 @@ RSpec.describe Entity, type: :model do
     entity = Entity.new(effects: { keen_eyes: 3 })
     expect(entity.status_effects.keen_eyes).to eq 3
   end
+
+  it 'should compute gizmo attributes correctly' do
+    entity = Entity.new(equips: [{ attributes: [ :class_shield ]}])
+    expect(entity.gizmo_attributes.class_shield).to eq(true)
+  end
 end

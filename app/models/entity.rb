@@ -1,14 +1,11 @@
 class Entity
   include Components::PrimaryAttribute
   include Components::StatusEffect
+  include Components::EquippedGizmo
 
-  def initialize stats: {}, effects: {}
-    stats.each do |k, v|
-      primary_attributes[k] = v  
-    end
-
-    effects.each do |k, v|
-      status_effects[k] = v
-    end
+  def initialize stats: {}, effects: {}, equips: {}
+    stats.each { |k, v| primary_attributes[k] = v }
+    effects.each { |k, v| status_effects[k] = v }
+    equips.each { |eq| compute_gizmo_attributes(eq) }
   end
 end
