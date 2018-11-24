@@ -3,7 +3,7 @@ class Entity
 
   def initialize stats: {}
     stats.each do |k, v|
-      Components::PrimaryAttribute.attributes[k] = v  
+      primary_attributes[k] = v  
     end
   end
 end
