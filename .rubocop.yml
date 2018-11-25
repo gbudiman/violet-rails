@@ -1,0 +1,33 @@
+AllCops:
+  Exclude:
+    - Rakefile
+    - config.ru
+    - bin/*
+    - db/**/*.rb
+    - config/**/*.rb
+    - test/**/*.rb
+  TargetRubyVersion: 2.5.3
+
+Rails:
+  Enabled: true
+
+Metrics/LineLength:
+  Max: 80
+  Exclude:
+    - Gemfile
+    - spec/rails_helper.rb
+  IgnoredPatterns:
+    - '(\A|\s)#'
+
+Metrics/BlockLength:
+  ExcludedMethods:
+    - class_methods
+    - namespace
+    - draw
+    - context
+    - describe
+    - shared_examples
+    - shared_examples_for
+
+Style/Documentation:
+  Enabled: false

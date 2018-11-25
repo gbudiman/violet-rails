@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Components
   module StatusEffect
     include Schools::Stance
@@ -9,10 +11,10 @@ module Components
       end
 
       OpenStruct.new(h)
-    end 
+    end
 
     def status_effect_reset
-      status_effects.to_h.each do |k, v|
+      status_effects.to_h.each do |k, _v|
         status_effects[k] = 0
       end
     end
