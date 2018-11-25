@@ -1,7 +1,7 @@
 module Components
-  include Schools::Stance
-
   module StatusEffect
+    include Schools::Stance
+    
     mattr_accessor :status_effects do
       h = {}
       ['stance'].each do |school|

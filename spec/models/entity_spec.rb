@@ -22,4 +22,10 @@ RSpec.describe Entity, type: :model do
     entity = Entity.new(equips: [{ attributes: [ :class_shield ]}])
     expect(entity.gizmo_attributes.class_shield).to eq(true)
   end
+
+  it 'should assing acquired skills correctly' do
+    entity = Entity.new(skills: [:stance_vigilance, :stance_vigilance_keen_eyes])
+    expect(entity.acquired_skills.stance_vigilance).to eq(true)
+    expect(entity.acquired_skills.stance_vigilance_keen_eyes).to eq(true)
+  end
 end
