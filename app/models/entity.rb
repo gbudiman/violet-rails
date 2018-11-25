@@ -2,7 +2,7 @@ class Entity
   include Components::PrimaryAttribute
   include Components::StatusEffect
   include Components::EquippedGizmo
-  #include Schools::Stance
+  include Schools::Stance
 
   def initialize stats: {}, effects: {}, equips: {}
     stats.each { |k, v| primary_attributes[k] = v }
