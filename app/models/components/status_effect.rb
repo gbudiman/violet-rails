@@ -1,7 +1,7 @@
 module Components
   module StatusEffect
     include Schools::Stance
-    
+
     mattr_accessor :status_effects do
       h = {}
       ['stance'].each do |school|
@@ -9,6 +9,12 @@ module Components
       end
 
       OpenStruct.new(h)
-    end  
+    end 
+
+    def status_effect_reset
+      status_effects.to_h.each do |k, v|
+        status_effects[k] = 0
+      end
+    end
   end
 end

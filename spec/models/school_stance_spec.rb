@@ -1,6 +1,34 @@
 require 'rails_helper'
 
 RSpec.describe 'SchoolStance', type: :model do
+  before :each do 
+    @entity
+  end
+
+  context 'unmet equipment requirement' do
+    it 'should raise error' do
+      @entity = Entity.new(
+        skills: [ :stance_vigilance ]
+      )
+
+      expect do
+        @entity.stance_vigilance 
+      end.to raise_error(Entity::UnmetRequirement, /has_equipped_shield/)
+    end
+  end
+
+  context 'unacquired skill' do
+    it 'should raise error' do
+      @entity = Entity.new(
+        equips: [ { attributes: [ :shield ]}]
+      )
+
+      expect do
+        @entity.stance_vigilance
+      end.to raise_error(Schools::UnacquiredSkill)
+    end
+  end
+
   context 'switching stance' do
     before :each do
       @entity = Entity.new(
@@ -22,7 +50,10 @@ RSpec.describe 'SchoolStance', type: :model do
 
   context 'advanced stance' do
     before :each do
-      @entity = Entity.new(skills: [ :stance_bulwark, :stance_bulwark_bladestorm ])
+      @entity = Entity.new(
+        equips: [ { attributes: [ :shield ]}],
+        skills: [ :stance_bulwark, :stance_bulwark_bladestorm ]
+      )
     end
 
     it 'should grant bonus status effect' do

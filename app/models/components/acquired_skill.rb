@@ -10,5 +10,11 @@ module Components
 
       OpenStruct.new(h)
     end
+
+    def skill_reset 
+      acquired_skills.to_h.each do |k, v|
+        acquired_skills[k] = false
+      end
+    end
   end
 end

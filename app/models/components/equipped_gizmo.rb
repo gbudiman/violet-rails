@@ -13,5 +13,11 @@ module Components
         gizmo_attributes[attribute] = true
       end
     end
+
+    def equip_reset
+      gizmo_attributes.to_h.each do |k, v|
+        gizmo_attributes[k] = false
+      end
+    end
   end
 end

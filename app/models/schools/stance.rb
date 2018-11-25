@@ -1,4 +1,7 @@
 module Schools
+  class UnacquiredSkill < StandardError
+  end
+
   module Stance
     @stances = {
       stance_vigilance: [ :has_equipped_shield ],
@@ -68,7 +71,9 @@ module Schools
 
     @stances.each do |stance, reqs|
       define_method(stance) do
-        if acquired_skills[stance] and fulfill_requirements(reqs)
+        raise UnacquiredSkill unless acquired_skills[stance]
+
+        if fulfill_requirements(reqs)
           reset_stance
           apply_stance_effects stance
         end

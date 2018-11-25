@@ -6,6 +6,8 @@ class Entity
   include Schools::Stance
 
   def initialize stats: {}, effects: {}, equips: {}, skills: {}
+    reset_all
+
     stats.each { |k, v| primary_attributes[k] = v }
     effects.each { |k, v| status_effects[k] = v }
     equips.each { |eq| compute_gizmo_attributes(eq) }
@@ -22,6 +24,20 @@ class Entity
   end
 
   def fulfill_requirements(reqs)
-    reqs.map { |req| send(req) }.reduce(:&)
+    unmet_requirements = []
+    reqs.each { |req| unmet_requirements.push(req) unless send(req) }
+    raise UnmetRequirement, unmet_requirements if unmet_requirements.length > 0
+
+    true
+  end
+
+  def reset_all
+    primary_attribute_reset
+    skill_reset
+    status_effect_reset
+    equip_reset
+  end
+
+  class UnmetRequirement < StandardError
   end
 end
