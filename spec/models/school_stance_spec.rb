@@ -4,7 +4,7 @@ RSpec.describe 'SchoolStance', type: :model do
   context 'switching stance' do
     before :each do
       @entity = Entity.new(
-        equips: [ { attributes: [ :class_shield ]}],
+        equips: [ { attributes: [ :shield ]}],
         skills: [ :stance_vigilance, :stance_aggression ]
       )
     end

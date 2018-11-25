@@ -2,8 +2,8 @@ module Components
   module EquippedGizmo
     mattr_reader :gizmo_attributes do
       OpenStruct.new([
-        :class_shield,
-        :class_one_handed
+        :shield,
+        :one_handed
       ].map { |k| [k, false] }.to_h)
     end
 

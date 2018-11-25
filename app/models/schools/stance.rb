@@ -1,15 +1,15 @@
 module Schools
   module Stance
-    @stances = [
-      :stance_vigilance,
-      :stance_bulwark,
-      :stance_colossus,
-      :stance_aggression,
-      :stance_recovery,
-      :stance_phalanx,
-      :stance_mobility,
-      :stance_focus,
-    ]
+    @stances = {
+      stance_vigilance: [ :has_equipped_shield ],
+      stance_bulwark: [ :has_equipped_shield ],
+      stance_colossus: [ :has_equipped_shield ],
+      stance_aggression: [ :has_equipped_shield ],
+      stance_recovery: [ :has_equipped_shield ],
+      stance_phalanx: [ :has_equipped_shield ],
+      stance_mobility: [ :has_equipped_shield ],
+      stance_focus: [ :has_equipped_shield ],
+    }
 
     @effects = [
       :keen_eyes,
@@ -46,9 +46,9 @@ module Schools
     ]
 
     mattr_accessor :skills do @skills end
-    mattr_accessor :stances do @stances end
+    mattr_accessor :stances do @stances.keys end
     mattr_accessor :effects do
-      (@stances + @effects).map { |k| [k, 0] }.to_h
+      (@stances.keys + @effects).map { |k| [k, 0] }.to_h
     end
 
     def reset_stance
@@ -66,9 +66,9 @@ module Schools
       end
     end
 
-    @stances.each do |stance|
+    @stances.each do |stance, reqs|
       define_method(stance) do
-        if acquired_skills[stance]
+        if acquired_skills[stance] and fulfill_requirements(reqs)
           reset_stance
           apply_stance_effects stance
         end

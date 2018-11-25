@@ -11,4 +11,17 @@ class Entity
     equips.each { |eq| compute_gizmo_attributes(eq) }
     skills.each { |sk| acquired_skills[sk] = true}
   end
+
+  def method_missing(method_name, *args)
+    spliced = method_name.to_s.split(/_/)
+
+    case method_name.to_s
+    when /has_equipped/
+      gizmo_attributes[spliced[2..-1].join('_')]
+    end
+  end
+
+  def fulfill_requirements(reqs)
+    reqs.map { |req| send(req) }.reduce(:&)
+  end
 end
