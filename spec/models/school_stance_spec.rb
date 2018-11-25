@@ -9,7 +9,7 @@ RSpec.describe 'SchoolStance', type: :model do
     it 'should only have only one active stance' do
       @entity.stance_vigilance
       expect(@entity.status_effects.stance_vigilance).to eq true
-      
+
       @entity.stance_aggression
       expect(@entity.status_effects.stance_vigilance).to eq 0
       expect(@entity.status_effects.stance_aggression).to eq true

@@ -2,29 +2,31 @@ module Schools
   module Stance
     @stances = [
       :stance_vigilance,
-      :stance_vigilance_keen_eyes,
       :stance_bulwark,
-      :stance_bulwark_bladestorm,
       :stance_colossus,
-      :stance_colossus_deadlock,
       :stance_aggression,
-      :stance_aggression,
-      :stance_aggression_shield_durability,
-      :stance_aggression_quicken,
-      :stance_aggression_continuum,
       :stance_recovery,
-      :stance_recovery_deft_block,
       :stance_phalanx,
-      :stance_phalanx_extension,
-      :stance_phalanx_gap,
-      :stance_phalanx_polearm,
       :stance_mobility,
       :stance_focus,
     ]
 
+    @effects = [
+      :keen_eyes,
+      :bulwark_bladestorm,
+      :colossus_deadlock,
+      :aggression_shield_durability,
+      :aggression_shield_quicken,
+      :aggression_continuum,
+      :aggression_deft_block,
+      :phalanx_extension,
+      :phalanx_gap,
+      :phalanx_polearm,
+    ]
+
     mattr_accessor :stances do @stances end
-    mattr_accessor :status_effects do
-      OpenStruct.new(@stances.map { |k| [k, 0] }.to_h)
+    mattr_accessor :effects do
+      (@stances + @effects).map { |k| [k, 0] }.to_h
     end
 
     def reset_stance
